@@ -1,0 +1,12 @@
+.my-btn {
+  background: rgba(0, 162, 255, 1) !important;
+  border: none !important;
+}
+.my-btn:hover {
+  background: rgba(0, 102, 255, 1) !important;
+}
+.my-btn:focus,
+.my-btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
