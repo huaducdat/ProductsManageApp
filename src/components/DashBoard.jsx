@@ -16,12 +16,14 @@ import Products, { cooldown } from "./Products";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import EditModal from "./EditModal";
 
 export default function DashBoard() {
   const navigate = useNavigate();
   const [err, setErr] = useState(undefined);
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
+
   const fletch = async () => {
     try {
       setLoading(true);
@@ -43,7 +45,10 @@ export default function DashBoard() {
   return (
     <Box className="min-h-svh min-w-svw h-auto bg-white flex flex-col gap-3 justify-start items-center">
       <AppBar position="static" color="primary">
-        <Toolbar variant="regular" className="bg-blue-500 flex justify-between flex-wrap">
+        <Toolbar
+          variant="regular"
+          className="bg-blue-500 flex justify-between flex-wrap"
+        >
           <Stack
             direction="row"
             spacing={1}

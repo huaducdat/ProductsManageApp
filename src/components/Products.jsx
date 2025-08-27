@@ -15,9 +15,13 @@ import { useState } from "react";
 import { EditOutlined } from "@ant-design/icons";
 import { useSpring, animated, useTrail } from "@react-spring/web";
 import { DeleteOutlined } from "@ant-design/icons";
+import EditModal from "./EditModal";
 export const cooldown = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export default function Products({ lst }) {
+  const [editting, setEditting] = useState(null);
+  const handleSave = () => {};
+
   const [btnID, setBtnID] = useState(undefined);
   const [state, setState] = useState(undefined);
   const [processing, setProcessing] = useState(false);
@@ -116,11 +120,11 @@ export default function Products({ lst }) {
                 <CardActions>
                   <div className="flex flex-col gap-1 w-full">
                     <Button
-                      type="primary"
+                      type="default"                     
                       block
                       loading={btnID === ite.id && state === "detail"}
                       icon={<SearchOutlined />}
-                      onClick={() => fakeWait(900, ite.id, "detail")}
+                      onClick={() => fakeWait(300, ite.id, "detail")}
                     >
                       Show in Detail
                     </Button>
@@ -129,7 +133,16 @@ export default function Products({ lst }) {
                       block
                       loading={btnID === ite.id && state === "edit"}
                       icon={<EditOutlined />}
-                      onClick={() => fakeWait(900, ite.id, "edit")}
+                      onClick={async () => {
+                        fakeWait(300, ite.id, "edit");
+                        const openModal = (ms) =>
+                          new Promise(() => {
+                            setTimeout(() => {
+                              setEditting(ite);
+                            }, ms);
+                          });
+                        await openModal(300);
+                      }}
                     >
                       Edit
                     </Button>
@@ -153,9 +166,8 @@ export default function Products({ lst }) {
                         }
                       }}
                     >
-                      {" "}
                       <Button
-                        type="primary"
+                        type="default"
                         block
                         danger
                         loading={btnID === ite.id && state === "delete"}
@@ -178,6 +190,14 @@ export default function Products({ lst }) {
           );
         })}
       </Stack>
+      <EditModal
+        open={!!editting}
+        product={editting}
+        onsave={handleSave}
+        onCancel={() => {
+          setEditting(null);
+        }}
+      />
     </Box>
   );
 }
