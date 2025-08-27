@@ -43,14 +43,14 @@ export default function DashBoard() {
   return (
     <Box className="min-h-svh min-w-svw h-auto bg-white flex flex-col gap-3 justify-start items-center">
       <AppBar position="static" color="primary">
-        <Toolbar variant="regular" className="bg-blue-500 flex justify-between">
+        <Toolbar variant="regular" className="bg-blue-500 flex justify-between flex-wrap">
           <Stack
             direction="row"
             spacing={1}
             divider={
               <Divider orientation="vertical" flexItem className="bg-white" />
             }
-            className="flex items-center"
+            className="flex items-center flex-wrap"
             sx={{ py: 1 }}
           >
             <Image src={logo} alt="logo" style={{ height: "60px" }} />
@@ -62,6 +62,7 @@ export default function DashBoard() {
             direction="row"
             spacing={1}
             divider={<Divider orientation="vertical" color="white" />}
+            className="flex-wrap"
           >
             <AccountMenu />
             <MuiButton

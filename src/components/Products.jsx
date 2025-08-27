@@ -31,7 +31,7 @@ export default function Products({ lst }) {
   };
 
   const trail = useTrail(lst.length, {
-    from: { opacity: 0, transform: "translate(-15px, -120px)" },
+    from: { opacity: 0, transform: "translate(120px, 60px)" },
     to: { opacity: 1, transform: "translate(0px, 0px)" },
     config: { tension: 180, friction: 30 },
   });
