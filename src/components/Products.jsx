@@ -8,6 +8,7 @@ import {
   Divider,
   Stack,
   Typography,
+  Button as MuiButton,
 } from "@mui/material";
 import { Button, Popconfirm } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
@@ -16,9 +17,13 @@ import { EditOutlined } from "@ant-design/icons";
 import { useSpring, animated, useTrail } from "@react-spring/web";
 import { DeleteOutlined } from "@ant-design/icons";
 import EditModal from "./EditModal";
+import AddIcon from "@mui/icons-material/Add";
+
 export const cooldown = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export default function Products({ lst }) {
+  const [addOpening, setAddOpenning] = useState(false);
+
   const [editting, setEditting] = useState(null);
   const handleSave = () => {};
 
@@ -54,6 +59,15 @@ export default function Products({ lst }) {
       >
         Produsts List
       </Typography>
+      <MuiButton
+        variant="contained"
+        sx={{ mb: 1, fontWeight: "800", gap: 1 }}
+        className="font-black"
+        onClick={() => {}}
+      >
+        {" "}
+        <AddIcon /> Add Product
+      </MuiButton>
       <Divider className="w-full" sx={{ mb: 1 }} />
       <Stack
         direction="row"
@@ -120,7 +134,7 @@ export default function Products({ lst }) {
                 <CardActions>
                   <div className="flex flex-col gap-1 w-full">
                     <Button
-                      type="default"                     
+                      type="default"
                       block
                       loading={btnID === ite.id && state === "detail"}
                       icon={<SearchOutlined />}
