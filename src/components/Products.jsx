@@ -18,10 +18,12 @@ import { useSpring, animated, useTrail } from "@react-spring/web";
 import { DeleteOutlined } from "@ant-design/icons";
 import EditModal from "./EditModal";
 import AddIcon from "@mui/icons-material/Add";
+import { useNavigate } from "react-router-dom";
 
 export const cooldown = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export default function Products({ lst }) {
+  const navigate = useNavigate();
   const [addOpening, setAddOpenning] = useState(false);
 
   const [editting, setEditting] = useState(null);
@@ -138,7 +140,16 @@ export default function Products({ lst }) {
                       block
                       loading={btnID === ite.id && state === "detail"}
                       icon={<SearchOutlined />}
-                      onClick={() => fakeWait(300, ite.id, "detail")}
+                      onClick={() => {
+                        fakeWait(300, ite.id, "detail");
+                        const openDetailPage = (ms) =>
+                          new Promise(() =>
+                            setTimeout(() => {
+                              navigate(`/products/${ite.id}`);
+                            }, ms)
+                          );
+                        openDetailPage(300);
+                      }}
                     >
                       Show in Detail
                     </Button>

@@ -34,7 +34,7 @@ export default function DashBoard() {
       setLoading(false);
     } finally {
       setErr(undefined);
-      await cooldown(900);
+      await cooldown(300);
       setLoading(false);
     }
   };
